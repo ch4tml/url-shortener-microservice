@@ -3,29 +3,23 @@
  * GET home page.
  */
 exports.index = function(req, res){
-    res.render('index', { title: 'Request Header Parser Microservice' });
+    res.render('index', {
+        title: 'URL Shortener Microservice',
+        author: "ch4tml"
+    });
 };
 /*
  * GET time request and return JSON object
  */
-exports.whoami = function(req, res){
-    // RegExp to capture OS. OS is contained within first set of parens in user-agent header
-    // Aim of RegExp is to find first set of parens and capture the group that is within those parens, WITHOUT the parens being captured. This becomes second item in array
-    var re = new RegExp(/\((.+?)\)/i);
-    // Store request headers in new variable
-    var userData = req.headers;
-    // Gets first five characters from the accept-language string. These characters are the prefered language
-    var language = userData["accept-language"].slice(0, 5);
-    // As explained with the RegExp statement above, group captured is second item in array
-    var operatingSystem = userData["user-agent"].match(re)[1];
+exports.urlshortener = function(req, res){
+    var short_url = "https://ch4tml-url-ms.herokuapp.com/" + Math.floor(Math.random()*10);
     // If all well, writehead 200 with mimetype JSON
     res.writeHead(200, {"Content-Type" : "application/json"});
     // Create json object to return to user
     var json = {
         // Square bracket notation for non-standard property names
-        "ip": userData["x-forwarded-for"],
-        "language": language,
-        "operating-system": operatingSystem
+        "original_url": req.params.url,
+        "short_url": short_url
     };
     var data = JSON.stringify(json);
     res.end(data);

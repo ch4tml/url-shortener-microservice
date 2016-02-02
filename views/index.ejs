@@ -7,22 +7,36 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
-  <body style="text-align: center">
+  <body style="text-align: left">
     <h1><%= title %></h1>
-    <div class="container-fluid" style="text-align: center">
-        <blockquote>
-            <p>User Story: I can get the IP address, language and operating system for my browser.</p>
-        </blockquote>
+    <div class="container-fluid" style="text-align: left">
+        <div class="jumbotron" style="text-align: left">
+            <ul>
+              <li>
+                User Story: I can pass a URL as a parameter and I will receive a shortened URL in the JSON response.
+              </li>
+              <li>
+                User Story: If I pass an invalid URL that doesn't follow the valid http://www.example.com format, the JSON response will contain an error instead.
+              </li>
+              <li>
+                User Story: When I visit that shortened URL, it will redirect me to my original link.
+              </li>
+            </ul>
+        </div><!-- Jumobtron -->
         <div>
             <h2>Examples</h2>
             <p>
-                Input: https://ch4tml-rh-ms.herokuapp.com/api/whoami<br>
-                Ouput: <code>{"IP": 127.0.0.1, "language": "en-US", "operating system": "Microsoft"}</code>
+                Input: https://ch4tml-url-ms.herokuapp.com/news/http://www.bbc.co.uk/news<br>
+                Ouput: <code>{"original_url": "http://www.bbc.co.uk/news", "short_url": "https://ch4tml-url-ms.herokuapp.com/x"}</code>
+            </p>
+            <p>
+                Input: https://ch4tml-url-ms.herokuapp.com/news/http://www.guardian.co.uk<br>
+                Ouput: <code>{"original_url": "http://www.guardian.co.uk", "short_url": "https://ch4tml-url-ms.herokuapp.com/x"}</code>
             </p>
         </div>
     </div>
   </body>
   <footer>
-      Created by <a href="http://www.freecodecamp.com/ch4tml" target="_blank">ch4tml</a>
+      Created by <a href="http://www.freecodecamp.com/ch4tml" target="_blank"><%= author %></a>
   </footer>
 </html>
