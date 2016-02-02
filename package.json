@@ -9,9 +9,11 @@
     "async": "~0.2.8",
     "ejs": "^2.4.1",
     "express": "~3.2.4",
+    "mongodb": "^2.1.4",
+    "mongoose": "^4.3.7",
     "socket.io": "~0.9.14"
   },
-  "engines":{
+  "engines": {
     "node": "4.1.1",
     "npm": "2.14.4"
   }
