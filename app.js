@@ -6,7 +6,9 @@ var routes = require("./routes/routes");
 var path = require("path");
 var http = require("http");
 var mongo = require("mongodb").MongoClient;
-var url = "mongodb://localhost:27017/paths";
+var mongoose = require("mongoose");
+var configDB = require("./config/database.js");
+//var url = "mongodb://localhost:27017/paths";
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
