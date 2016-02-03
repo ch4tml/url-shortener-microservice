@@ -33,7 +33,10 @@ if ('development' == app.get('env')) {
 }
 
 app.get("/", routes.index); // Home route
-app.get("/new/http://:url*", routes.urlshortener); // Time query route
+// Need to include "http://" in query. * - url wildcard query
+//app.get("/new/http://:url*", routes.urlshortener);
+app.get("/new/*", routes.urlshortener);
+// Allows user to enter short url path to redirect
 app.get("/:path", routes.redirect);
 
 http.createServer(app).listen(app.get('port'), function(){
