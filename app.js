@@ -3,6 +3,7 @@
 var express = require("express");
 var app = express();
 var routes = require("./routes/routes");
+var bodyParser = require('body-parser');
 var path = require("path");
 var http = require("http");
 var mongo = require("mongodb").MongoClient;
@@ -20,7 +21,8 @@ app.set('port', process.env.PORT || 8080);
 app.use(express.favicon());
 // Logs actions and requests when server running
 app.use(express.logger('dev'));
-app.use(express.bodyParser());
+//app.use(express.bodyParser());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -31,7 +33,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get("/", routes.index); // Home route
-app.get("/new/:url", routes.urlshortener); // Time query route
+app.get("/new/http://:url*", routes.urlshortener); // Time query route
 app.get("/:path", routes.redirect);
 
 http.createServer(app).listen(app.get('port'), function(){

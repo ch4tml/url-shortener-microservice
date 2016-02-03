@@ -7,6 +7,7 @@
   "author": "Tom, ch4tml",
   "dependencies": {
     "async": "~0.2.8",
+    "body-parser": "^1.14.2",
     "ejs": "^2.4.1",
     "express": "~3.2.4",
     "mongodb": "^2.1.4",

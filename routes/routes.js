@@ -25,7 +25,6 @@ exports.urlshortener = function(req, res){
     // If all well, writehead 200 with mimetype JSON*/
     res.writeHead(200, {"Content-Type" : "application/json"});
     // Create json object to return to user
-    
     var enteredURL = new URL();
     
     enteredURL.original_url = req.params.url;
@@ -41,17 +40,9 @@ exports.urlshortener = function(req, res){
     });
 
     db.on("error", console.error.bind(console, "Connection error: "));
-    /*
-    URL.find({original_url: req.params.url}, function(err, doc){
-        if(err) throw err;
-        doc = JSON.stringify(doc);
-        res.end(doc);
-    });*/
-    //var data = JSON.stringify(enteredURL);
-    //res.end(data);
-    
+
     var json = {
-        "original_url": req.params.url,
+        "original_url": "http://" + req.params.url,
         "short_url": enteredURL.short_url
     };
     var data = JSON.stringify(json);
@@ -66,8 +57,6 @@ exports.redirect = function(req, res){
         console.log(doc["original_url"]);
         redirectUrl = doc["original_url"];
         console.log(redirectUrl);
-        //res.end(doc["original_url"]);
-        console.log("XKCD: " + redirectUrl);
         res.redirect("http://" + redirectUrl);
     });
 };
