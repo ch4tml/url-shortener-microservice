@@ -8,6 +8,7 @@ var http = require("http");
 var mongo = require("mongodb").MongoClient;
 var mongoose = require("mongoose");
 var configDB = require("./config/database.js");
+mongoose.connect(configDB.url);
 //var url = "mongodb://localhost:27017/paths";
 
 // view engine setup

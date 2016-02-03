@@ -1,13 +1,15 @@
 "use strict";
-/*var randomstring = require("randomstring");
+var randomstring = require("randomstring");
 var mongo = require("mongodb").MongoClient;
 var mongoose = require("mongoose");
 var configDB = require("../config/database.js");
-mongoose.connect(configDB.url);
-*//*
+mongoose.createConnection(configDB.url);
+var db = mongoose.connection;
+var URL = require("../app/models/url");
+/*
  * GET home page.
  */
-exports.module = function(app, mongoose, mongo, configDB){
+//exports.module = function(app, mongoose, mongo, configDB){
     exports.index = function(req, res){
         res.render('index', {
             title: "URL Shortener Microservice",
@@ -18,40 +20,33 @@ exports.module = function(app, mongoose, mongo, configDB){
      * GET time request and return JSON object
      */
     exports.urlshortener = function(req, res){
-        mongo.connect(configDB.url, function(err, db){
-            if(err) throw err;
-            else{
-                db.collection("paths").find({},
-                {_id : 0})
-                .toArray(function(err, documents){
-                    if(err)
-                        throw err;
-                    else{
-                        var json = JSON.stringify(documents);
-                        res.end(json);
-                    }
-                    db.close();
-                });
-                /*, function(err, docs){
-                    if(err) throw err;
-                    console.log(docs);
-                    res.end(docs);
-                    db.close();
-                });*/
-            }
-        });
-        /*var short_url = "https://ch4tml-url-ms.herokuapp.com/" + Math.floor(Math.random()*10);
+        //var short_url = "https://ch4tml-url-ms.herokuapp.com/" + randomstring.generate(7);
+        var stringGenerated = randomstring.generate(7);
         // If all well, writehead 200 with mimetype JSON*/
-        /*res.writeHead(200, {"Content-Type" : "application/json"});
+        res.writeHead(200, {"Content-Type" : "application/json"});
         // Create json object to return to user
-        var json = {
-            // Square bracket notation for non-standard property names
-            "original_url": req.params.url,
-            "short_url": short_url
-        };
-        var data = JSON.stringify(json);
-        console.log(data);
-        console.log(json);
-        res.end(data);*/
+        
+        var enteredURL = new URL();
+        
+        enteredURL.original_url = req.params.url;
+        enteredURL.short_url = "https://ch4tml-url-ms.herokuapp.com/" + stringGenerated;
+        enteredURL.stringGenerated = stringGenerated;
+        
+        console.log(enteredURL);
+        
+        enteredURL.save(function(err){
+            if(err) return console.error(err);
+            console.log("URL saved successfully");
+            console.log(enteredURL);
+        });
+
+        db.on("error", console.error.bind(console, "Connection error: "));
+        
+        URL.find({stringGenerated: "Xokbi66"}, function(err, doc){
+            if(err) throw err;
+            doc = JSON.stringify(doc);
+            res.end(doc);
+        });
+        //var data = JSON.stringify(enteredURL);
+        //res.end(data);
     };
-};
