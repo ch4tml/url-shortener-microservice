@@ -32,6 +32,7 @@ if ('development' == app.get('env')) {
 
 app.get("/", routes.index); // Home route
 app.get("/new/:url", routes.urlshortener); // Time query route
+app.get("/:path", routes.redirect);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
