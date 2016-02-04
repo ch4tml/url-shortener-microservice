@@ -4,6 +4,8 @@ Built as part of Free Code Camp's curriculum. API Challenge series - [URL Shorte
 
 Based on the example service [provided] (https://shurli.herokuapp.com/).
 
+### Heroku deployment: [Url Shortener Microservice] (https://ch4tml-url-ms.herokuapp.com/)
+
 ## Author 
 
 Built by [ch4tml](https://github.com/ch4tml/). Started on 2nd February 2016 and finished on xx February 2016.
