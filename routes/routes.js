@@ -4,9 +4,10 @@ var randomstring = require("randomstring");
 // Database setup
 var mongo = require("mongodb").MongoClient;
 var mongoose = require("mongoose");
-var configDB = require("../config/database.js");
-mongoose.createConnection(configDB.url);
+var configDB = process.env.MONGOLAB_URI || "mongodb://localhost:27017/paths";
+mongoose.createConnection(configDB);
 var db = mongoose.connection;
+//var db = mongoose.createConnection(configDB);
 var URL = require("../app/models/url");
 
 /* GET home page */

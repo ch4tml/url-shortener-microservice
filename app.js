@@ -10,8 +10,8 @@ var http = require("http");
 // Database setup
 var mongo = require("mongodb").MongoClient;
 var mongoose = require("mongoose");
-var configDB = require("./config/database.js");
-mongoose.connect(configDB.url);
+//var configDB = process.env.MONGOLAB_URI;
+//mongoose.connect(configDB);
 
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
