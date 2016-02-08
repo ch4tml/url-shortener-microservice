@@ -2,12 +2,9 @@
 // Package that generates random string
 var randomstring = require("randomstring");
 // Database setup
-var mongo = require("mongodb").MongoClient;
 var mongoose = require("mongoose");
-var configDB = process.env.MONGOLAB_URI || "mongodb://localhost:27017/paths";
-mongoose.createConnection(configDB);
-var db = mongoose.connection;
-//var db = mongoose.createConnection(configDB);
+mongoose.connect(process.env.MONGOLAB_URI || "mongodb://localhost:27017/paths");
+// Schema
 var URL = require("../app/models/url");
 
 /* GET home page */
@@ -69,8 +66,6 @@ exports.urlshortener = function(req, res){
                     console.log("URL saved successfully"); // Logging
                 });
             
-                db.on("error", console.error.bind(console, "Connection error: "));
-            
                 var json = {
                     "original_url": original_url,
                     "short_url": enteredURL.short_url
@@ -85,7 +80,6 @@ exports.urlshortener = function(req, res){
 
 // Route for when user enters a previously shortened path
 exports.redirect = function(req, res){
-    db.on("error", console.error.bind(console, "Connection error: "));
     URL.findOne({stringGenerated: req.params.path}, function(err, doc){
         if(err) throw err;
         if(doc)

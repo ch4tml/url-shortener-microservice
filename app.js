@@ -1,6 +1,7 @@
 "use strict";
 
 var express = require("express");
+var dotenv = require('dotenv').config();
 var app = express();
 var routes = require("./routes/routes");
 var bodyParser = require('body-parser');
@@ -10,8 +11,11 @@ var http = require("http");
 // Database setup
 var mongo = require("mongodb").MongoClient;
 var mongoose = require("mongoose");
-//var configDB = process.env.MONGOLAB_URI;
-//mongoose.connect(configDB);
+mongoose.createConnection(process.env.MONGOLAB_URI || "mongodb://localhost:27017/paths", function(err, res){
+  if(err) throw err;
+  else
+    console.log("Successfully connected to DB");
+});
 
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));

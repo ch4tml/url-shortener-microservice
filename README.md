@@ -8,4 +8,4 @@ Based on the example service [provided] (https://shurli.herokuapp.com/).
 
 ## Author 
 
-Built by [ch4tml](https://github.com/ch4tml/). Started on 2nd February 2016 and finished on xx February 2016.
+Built by [ch4tml](https://github.com/ch4tml/). Started on 2nd February 2016 and finished on 8th February 2016.
